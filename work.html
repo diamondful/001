@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作业展示</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+
+        #content-container {
+            display: none;
+            position: absolute;
+            margin-top: -1.5 em;
+            font-size: 30px;
+            padding: 5 px;
+            border: 1 px solid#ccc;
+            border-radius: 3px;
+            position: absolute;
+            top: 120px;
+            left: 620px;
+            width: 400px;
+
+        }
+
+        a {
+
+            font-size: 20px;
+            line-height: 20px;
+            background-color: antiquewhite;
+            font-family: 幼圆;
+        }
+
+        body {
+            background-color: #4B7C99;
+        }
+
+        #bigbox {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        #banner {
+            width: 1000px;
+            font-size: 0px;
+        }
+
+        #banner img {
+            width: 1000px;
+        }
+
+        nav {
+            background-color: #CCD0D9;
+            width: 1000px;
+            height: 60px;
+        }
+
+        nav a {
+            text-decoration: none;
+            line-height: 60px;
+            margin-left: 50px;
+            margin-right: 50px;
+            color: #020C16;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #1a9be6;
+        }
+
+        .dangqian {
+            color: #1a9be6;
+
+        }
+
+        #main {
+            height: 490px;
+            width: 1000px;
+            margin: 0 auto;
+            background-color: #86aacb;
+        }
+
+        #main_left {
+            width: 300px;
+            display: inline-block;
+            background-color: #86aacb;
+            float: left;
+        }
+
+        h2 {
+            box-sizing: border-box;
+            padding-left: 10px;
+            font-size: 20px;
+            line-height: 30px;
+            background-color: #03151F;
+            color: #CCD0D9;
+        }
+
+        #main_left img {
+            width: 300px;
+        }
+
+        #main_left p {
+            margin-left: 10px;
+            line-height: 40px;
+        }
+
+        #main_left span {
+            font-weight: bold;
+        }
+
+       #main_right {
+            position: relative;
+            width: 680px;
+            margin-left: 20px;
+            display: inline-block;
+            height: 200px;
+        }
+
+        #main_right img {
+            position: absolute;
+            width: 260px;
+            right: 0px;
+            top: 30px;
+        }
+
+        #main_right p {
+            width: 400px;
+            display: inline-block;
+            margin-left: 10px;
+            text-indent: 32px;
+            line-height: 30px;
+            margin-top: 10px;
+        }
+
+        #luxing {
+            background-color: #86aacb;
+            width: 1000px;
+        }
+
+        #luxing div {
+            font-size: 0px;
+        }
+
+        #picture {
+            font-size: 0px;
+            display: inline-block;
+            margin-left: 15px;
+            margin-right: 15px;
+            margin-top: 25px;
+        }
+
+        #picture img {
+            width: 200px;
+        }
+
+        #picture p {
+            font-size: 16px;
+            text-align: center;
+            line-height: 60px;
+
+        }
+
+        footer {
+            line-height: 60px;
+            font-size: 14px;
+            text-align: center;
+            background-color: #CCD0D9;
+        }
+
+        #main_right ul li {
+            width: 660px;
+            margin-left: 10px;
+            font-size: 12px;
+            margin-top: 10px;
+            border-bottom: 1px dotted #ccc;
+            padding-bottom: 10px;
+        }
+
+        #main_right ul li span {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        #liuyan {
+            width: 660px;
+            margin-left: 10px;
+            margin: 20px;
+        }
+
+        #liuyan span {
+            display: inline-block;
+            width: 80px;
+            line-height: 40px;
+        }
+
+        button {
+            width: 100px;
+            height: 30px;
+            margin-left: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="bigbox">
+        <div id="banner">
+            <img src="picture/banner.png" alt="">
+        </div>
+        <nav>
+            <a href="index.html">首页</a>
+            <a class="dangqian" href="work.html">作业</a>
+            <a href="rizhi.html">日志</a>
+            <a href="liuyan.html">留言板</a>
+        </nav>
+        <div id="main">
+            <div id="main_left">
+                <h2>作业列表</h2>
+               
+
+                <ol>
+                    <li><a href="work1.html" target="_blank" data-content="初学gitbash">第1次作业</a></li>
+                    <li><a href="work2.html" target="_blank" data-content="主要是对电子书简介的理解和对linux系统的认识 ">第2次作业</a>
+                    </li>
+                    <li><a href="work3.html" target="_blank" data-content="对文本文件中的信息进行提取分类">第3次作业</a></li>
+                    <li><a href="链接4" target="_blank">第4次作业</a></li>
+                    <li><a href="链接5" target="_blank">第5次作业</a></li>
+                    <li><a href="链接6" target="_blank">第6次作业</a></li>
+                    <li><a href="链接7" target="_blank">第7次作业</a></li>
+                    <li><a href="链接8" target="_blank">第8次作业</a></li>
+                    <li><a href="链接9" target="_blank">第9次作业</a></li>
+                    <li><a href="链接10" target="_blank">第10次作业</a></li>
+                    <li><a href="链接11" target="_blank">第11次作业</a></li>
+                    <li><a href="链接12" target="_blank">第12次作业</a></li>
+                </ol>
+                <div id="content-container"></div>
+
+                <script>
+                    // 获取超链接和内容容器
+                    const links = document.querySelectorAll('a');
+                    const contentContainer = document.getElementById('content-container');
+
+                    // 监听鼠标悬停事件
+                    links.forEach(link => {
+                        link.addEventListener('mouseover', (event) => {
+                            const content = event.target.getAttribute('data-content');
+                            contentContainer.textContent = content;
+                            contentContainer.style.display = 'block';
+                        });
+
+                        link.addEventListener('mouseout', () => {
+                            contentContainer.style.display = 'none';
+                        });
+                    });
+                </script>
+            </div>
+            <div id="main_right">
+                <h2>作业介绍</h2>
+
+                <img src="picture/life.png" alt="">
+            </div>
+        </div>
+        <div id="luxing">
+            <h2>秀秀美图 <a href="https://weibo.com/u/3669102477" target="_blank">去看看她</a></h2>
+            <div>
+                
+                <div id="picture">
+                    <img src="01.jpg" alt="">
+                    <p>
+                        1
+                    </p>
+                </div>
+                <div id="picture">
+                    <img src="02.jpg" alt="">
+                    <p>
+                        2
+                    </p>
+                </div>
+                <div id="picture">
+                    <img src="03.jpg" alt="">
+                    <p>
+                       3
+                    </p>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>
+                版权所有©yelu
+            </p>
+        </footer>
+    </div>
+</body>
+
+
+</html>
