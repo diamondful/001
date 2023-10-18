@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频播放器</title>
+    <style>
+        input {
+            font-size: 25px;
+        }
+
+        body #jump {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            z-index: 9999;
+        }
+
+        html {
+            display: flex;
+            min-height: 80vh;
+            background-color: antiquewhite;
+        }
+
+        body {
+            background-color: rgb(191, 229, 225);
+            margin: auto;
+            width: 700px;
+            border: 2px solid black;
+            border-radius: 10px;
+            border-color: aqua;
+            cursor: pointer;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+
+        }
+
+        button {
+            color: #fff;
+            background-color: #da4f49;
+            border: 1px solid #bd362f;
+            font-size: 25px;
+            font-family: '圆体';
+            margin-top: 30px;
+            margin-right: 15px;
+            margin-left: 50px;
+            margin-bottom: 30px;
+            vertical-align: middle;
+            font-size: 30px;
+            font-weight: 800;
+
+        }
+
+        #videoPlayer {
+            border: 2px solid black;
+            border-radius: 10px;
+            width: 700px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>MyVideoPlayer</h1>
+    <video id="videoPlayer" width="600px">
+        <source src="west.mp4">
+
+    </video>
+    <div>
+        <button id="play-Pause-Button">播放</button>
+        <button onclick="previousVideo()">上一个</button>
+        <button onclick="nextVideo()">下一个</button>
+
+        <br>
+
+        TIM:<input type="text" id="jumpTime" placeholder="跳转时间/（秒）">
+        <br>
+        VDO:<input type="text" id="jumpVideo" placeholder="跳转视频/（序号）">
+        <button id="jumpBut" onclick="jumpTo()">跳转</button>
+
+    </div>
+    <script>
+        var videoPlayer = document.getElementById('videoPlayer');
+        var jumpBut = document.getElementById('jump');
+        var playPauseButton = document.getElementById('play-Pause-Button');
+        var videos = ["west.mp4", "funDogs.mp4", "1.mp4",
+            "7.mp4", "2.mp4", "3.mp4", "4.mp4",
+            "5.mp4", "6.mp4"
+        ]; // 视频文件路径数组
+        var currentVideoIndex = 0; // 当前播放的视频索引
+        //如果视频处于暂停状态，播放并改变按钮的文本
+        function playPause() {
+            if (videoPlayer.paused) {
+                videoPlayer.play();
+                playPauseButton.innerHTML = '暂停';
+            } else {
+                videoPlayer.pause();
+                playPauseButton.innerHTML = "播放";
+            }
+        }
+
+
+        function previousVideo() {
+            if (currentVideoIndex > 0) {
+                currentVideoIndex--;
+            } else {
+                currentVideoIndex = videos.length - 1;
+            }
+            changeVideoSource();
+        }
+
+        function nextVideo() {
+            if (currentVideoIndex < videos.length - 1) {
+                currentVideoIndex++;
+            } else {
+                currentVideoIndex = 0;
+            }
+            changeVideoSource();
+        }
+
+        function changeVideoSource() {
+            videoPlayer.src = videos[currentVideoIndex]; //更改序号
+            videoPlayer.load(); //重新加载
+            videoPlayer.play(); //播放
+        }
+
+        function jumpTo() {
+
+
+            //获取具有 id 为 'jumpTime' 的输入框元素，并将其存储在 jumpTimeInput 变量中，方便jsp操作访问
+            var jumpTimeInput = document.getElementById('jumpTime');
+            var jumpVideoInput = document.getElementById('jumpVideo');
+            //将字符串转换成整数 
+            var jumpTime = parseInt(jumpTimeInput.value);
+            var jumpVideoIndex = parseInt(jumpVideoInput.value);
+            if (jumpTime > 0 || jumpVideoIndex > 0) {
+                playPauseButton.innerHTML = '暂停';
+            }
+            //规定区间防止数据越界
+            if (jumpVideoIndex >= 0 && jumpVideoIndex < videos.length - 2) {
+                currentVideoIndex = jumpVideoIndex;
+                changeVideoSource();
+            } else {
+                console.log('无效的视频序号');
+            }
+            if (jumpTime != 0) {
+                var videoPlayer = document.getElementById('videoPlayer');
+                videoPlayer.currentTime = jumpTime;
+                videoPlayer.play();
+            }
+        }
+        // 点击按钮的事件监听，调用方法playPause
+        playPauseButton.addEventListener('click', playPause)
+    </script>
+</body>
+
+</html>
