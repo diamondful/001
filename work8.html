@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频播放器</title>
+    <style>
+        input {
+            cursor: pointer;
+            font-size: 25px;
+        }
+
+        body #jump {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            z-index: 9999;
+        }
+
+        html {
+            display: flex;
+            min-height: 80vh;
+            background-color: antiquewhite;
+        }
+
+        body {
+            margin: 20px;
+            background-color: rgb(191, 229, 225);
+            border: 2px solid black;
+            border-radius: 10px;
+            border-color: aqua;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        button {
+            color: #fff;
+            background-color: #da4f49;
+            border: 1px solid #bd362f;
+            font-size: 25px;
+            font-family: '圆体';
+            margin-top: 30px;
+            margin-right: 15px;
+            margin-left: 50px;
+            margin-bottom: 30px;
+            vertical-align: middle;
+            font-size: 30px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        input {
+            font-size: 20px;
+            margin-top: 10px;
+            margin-left: 50px;
+            font-family: '圆体';
+            border: 1px solid #bd362f;
+        }
+
+        #videoPlayer {
+            border: 2px solid black;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        div#logo {
+            color: white;
+            position: absolute;
+            right: 40px;
+            top: 130px;
+            font-size: 40px;
+            background-color: red;
+            border-radius: 10px;
+            z-index: 0;
+        }
+
+        div#showTime {
+            color: white;
+            position: absolute;
+            left: 40px;
+            top: 130px;
+            font-size: 40px;
+            background-color: blue;
+            border-radius: 10px;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>MyVideoPlayer</h1>
+    <video id="videoPlayer">
+        <source src="west.mp4">
+
+    </video>
+    <div id="showTime"> </div>
+    <div id="logo">准备播放视频</div>
+
+    <div id="UI">
+        <div id="duration"></div>
+        <button id="play-Pause-Button">播放</button>
+        <button onclick="previousVideo()">上一个</button>
+        <button onclick="nextVideo()">下一个</button>
+
+        <br>
+        <!-- // -->
+        TIM:<input type="text" id="jumpTime" placeholder="跳转时间/（秒）">
+        <br>
+        VDO:<input type=" text" id="jumpVideo" placeholder="跳转视频/（序号）">
+        <button id="jumpBut" onclick="jumpTo()">跳转</button>
+
+    </div>
+    <script>
+        // 获取具有id为"videoPlayer"的HTML元素，并将其赋值给变量videoPlayer,
+        //通过这个变量，我们可以通过JavaScript来操作和控制该视频播放器
+
+
+
+
+        var videoPlayer = document.getElementById('videoPlayer');
+        var jumpBut = document.getElementById('jump');
+        var playPauseButton = document.getElementById('play-Pause-Button');
+        var videos = ["west.mp4", "funDogs.mp4", "1.mp4",
+            "7.mp4", "2.mp4", "3.mp4", "4.mp4",
+            "5.mp4", "6.mp4"
+        ]; // 视频文件路径数组
+
+
+        var browserWidth = document.body.clientWidth;
+        videoPlayer.style.width = browserWidth + 'px';
+        var currentVideoIndex = 0; // 当前播放的视频索引
+        //如果视频处于暂停状态，播放并改变按钮的文本
+        function playPause() {
+            document.getElementById("logo").innerHTML = "正在播放第1个视频/共" + videos.length + " 个视频";
+            if (videoPlayer.paused) {
+                videoPlayer.play();
+                playPauseButton.innerHTML = '暂停';
+            } else {
+                videoPlayer.pause();
+                playPauseButton.innerHTML = "播放";
+            }
+        }
+
+
+        function previousVideo() {
+            if (currentVideoIndex > 0) {
+                currentVideoIndex--;
+            } else {
+                currentVideoIndex = videos.length - 1;
+            }
+            changeVideoSource();
+        }
+
+        function nextVideo() {
+            if (currentVideoIndex < videos.length - 1) {
+                currentVideoIndex++;
+            } else {
+                currentVideoIndex = 0;
+            }
+            changeVideoSource();
+        }
+
+        function changeVideoSource() {
+            videoPlayer.src = videos[currentVideoIndex]; //更改序号
+            videoPlayer.load(); //重新加载
+            videoPlayer.play(); //播放
+            document.getElementById("logo").innerHTML = "正在播放第 " + (currentVideoIndex + 1) + " 个视频/共" + videos.length +
+                " 个视频";
+        }
+        //跳转时间
+        // 获取跳转时间文本框元素
+        var ShowTime = document.getElementById('showTime');
+
+        // 在视频播放器加载完成后绑定 timeupdate 事件
+        videoPlayer.addEventListener('loadedmetadata', function () {
+            // 在每次视频播放时间更新时执行的事件处理程序
+            videoPlayer.addEventListener('timeupdate', function () {
+                // 更新跳转时间文本框的值为当前视频播放时间（以秒为单位）
+                ShowTime.innerHTML = Math.floor(videoPlayer.currentTime) + "秒/" + parseInt(videoPlayer
+                    .duration) + '秒';
+            });
+        });
+
+        function jumpTo() {
+            //获取具有 id 为 'jumpTime' 的输入框元素，并将其存储在 jumpTimeInput 变量中，方便jsp操作访问
+            var jumpTimeInput = document.getElementById('jumpTime');
+            var jumpVideoInput = document.getElementById('jumpVideo');
+            //将字符串转换成整数 
+            var jumpTime = parseInt(jumpTimeInput.value);
+            var jumpVideoIndex = parseInt(jumpVideoInput.value);
+            if (jumpTime > 0 || jumpVideoIndex > 0) {
+                playPauseButton.innerHTML = '暂停';
+            }
+            //规定区间防止数据越界
+            if (jumpVideoIndex >= 0 && jumpVideoIndex < videos.length - 2) {
+                currentVideoIndex = jumpVideoIndex;
+                changeVideoSource();
+            } else {
+                console.log('无效的视频序号');
+            }
+            if (jumpTime != 0) {
+                var videoPlayer = document.getElementById('videoPlayer');
+                videoPlayer.currentTime = jumpTime;
+                videoPlayer.play();
+            }
+        }
+        // 点击按钮的事件监听，调用方法playPause
+        playPauseButton.addEventListener('click', playPause)
+        //生成九个按钮用来控制进度
+        var durationDom = [];
+        for (let i = 0; i < 9; i++) {
+            let tempDom = document.createElement('input');
+            //产生一个对象
+            tempDom.type = 'button';
+            tempDom.value += 'TimePart' + (i + 1);
+            //循环结束前要将对象取出来放进数组
+            durationDom[i] = tempDom;
+            document.getElementById('duration').appendChild(durationDom[i]);
+        }
+        for (let i = 0; i < 9; i++) {
+            durationDom[i].onclick = function () {
+                videoPlayer.currentTime = i * videoPlayer.duration / 9
+            }
+        }
+    </script>
+</body>
+
+</html>
