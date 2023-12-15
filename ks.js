@@ -1,6 +1,6 @@
 var mediaData = {
-    audioPath: "https:jxzy-dmxy.jxstnu.edu.cn\\",
-    videoPath: "https:jxzy-dmxy.jxstnu.edu.cn\\tedVideos\\",
+    audioPath: "https://jxzy-dmxy.jxstnu.edu.cn/",
+    videoPath: "https://jxzy-dmxy.jxstnu.edu.cn/tedVideos/",
     //videoPath: "https:/jxzy-dmxy.jxstnu.edu.cn/",
 
     audioFileStruct: [{
